@@ -52,9 +52,11 @@ define('base_url', "http://localhost/Epatshala/");?>
                     <?php 
                     if (array_key_exists('id',$_SESSION)){
                 ?>
-                        <a style="text-decoration: none;" href="<?php echo base_url; ?>DB/logout.php">
-                        <button type="button" class="btn btn-outline-info d-none d-md-block d-lg-none me-3 fw-bold">log out</button>
-                        </a>
+                        <!-- Add onclick event for logout button -->
+                        <button 
+                            type="button" 
+                            class="btn btn-outline-info d-none d-md-block d-lg-none me-3 fw-bold"
+                            onclick="logoutAlert()">Log out</button>
                 <?php } else{ ?>
                         <a style="text-decoration: none;" href="<?php echo base_url; ?>others/signin.php">
                         <button type="button" class="btn btn-outline-info d-none d-md-block d-lg-none me-3 fw-bold">log in</button>
@@ -91,9 +93,11 @@ define('base_url', "http://localhost/Epatshala/");?>
                 <?php 
                     if (array_key_exists('id',$_SESSION)){
                 ?>
-                        <a style="text-decoration: none;" href="<?php echo base_url; ?>DB/logout.php">
-                        <button type="button" class="btn btn-outline-info fw-bold d-none d-lg-block d-xl-block d-xxl-block">Log out</button>
-                        </a>
+                        <!-- Add onclick event for logout button -->
+                        <button 
+                            type="button" 
+                            class="btn btn-outline-info fw-bold d-none d-lg-block d-xl-block d-xxl-block"
+                            onclick="logoutAlert()">Log out</button>
                 <?php } else{ ?>
                         <a style="text-decoration: none;" href="<?php echo base_url; ?>others/signin.php">
                         <button type="button" class="btn btn-outline-info fw-bold d-none d-lg-block d-xl-block d-xxl-block">Log in</button>
@@ -103,6 +107,17 @@ define('base_url', "http://localhost/Epatshala/");?>
             </div>
         </nav>
         <!-- Navbar End -->
+
+    <script type="text/javascript">
+        // JavaScript function to show an alert before logging out
+        function logoutAlert() {
+            // Display an alert box before proceeding with the logout
+            if (confirm("Are you sure you want to log out?")) {
+                // Redirect to logout page if user confirms
+                window.location.href = "<?php echo base_url; ?>DB/logout.php";
+            }
+        }
+    </script>
 
 </body>
 </html>
