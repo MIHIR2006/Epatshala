@@ -57,7 +57,11 @@ require 'header.php';
                                 
                                 <div class="d-flex justify-content-between align-items-center mt-3">
                                     <span class="text-primary fw-bold">$<?php echo number_format($row['price']); ?></span>
-                                    <?php if(!$purchased) { ?>
+                                    <?php if($purchased) { ?>
+                                        <a href="course_learning.php?id=<?php echo $row['c_id']; ?>" class="btn btn-sm btn-success px-3">
+                                            <i class="fas fa-play-circle me-1"></i>Start Learning
+                                        </a>
+                                    <?php } else { ?>
                                         <?php if(isset($_SESSION['id'])) { ?>
                                             <form method="post" action="<?php echo base_url; ?>DB/add_to_cart.php">
                                                 <input type="hidden" name="id" value="<?php echo $row['c_id']; ?>">

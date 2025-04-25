@@ -101,3 +101,16 @@ CREATE TABLE payment (
     PRIMARY KEY (id),
     FOREIGN KEY (order_id) REFERENCES orders(id)
 );
+
+
+
+
+
+
+C++ : https://youtu.be/8jLOx1hD3_o?si=ZJ_Oq1k9SzvqjbEj
+Java : https://youtu.be/eIrMbAQSU34?si=xoSSdNDfGfLhqRVB
+
+UI UX: https://youtu.be/c9Wg6Cb_YlU?si=lgK7oNHD4LvT5VmM
+Neural Networks : https://youtu.be/VyWAvY2CF9c?si=_cCrA4ZbpK5qoHxH
+Motion Graphics : https://youtu.be/ROw_Xnmg2W4?si=TT3KC-qp8MrPU7qh
+Video Editing: https://youtu.be/qDHnCFMZ9HA?si=0OGgIn7EuppA2vyr
