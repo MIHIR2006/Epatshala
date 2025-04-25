@@ -34,20 +34,40 @@ require 'header.php';
                                  alt="<?php echo htmlspecialchars($row['c_name']); ?>">
                             
                             <div class="card-body d-flex flex-column">
-                                <h2 class="card-title h5"><?php echo htmlspecialchars($row['c_name']); ?></h2>
+                                <?php
+                                // Check if user is logged in and has purchased the course
+                                $purchased = false;
+                                if(isset($_SESSION['id'])) {
+                                    $user_id = $_SESSION['id'];
+                                    $course_id = $row['c_id'];
+                                    $check_purchase = "SELECT * FROM enroll_details ed 
+                                                     JOIN enroll e ON ed.oid = e.id 
+                                                     WHERE e.uid = $user_id AND ed.c_id = $course_id";
+                                    $purchase_result = mysqli_query($db, $check_purchase);
+                                    $purchased = mysqli_num_rows($purchase_result) > 0;
+                                }
+                                ?>
+                                <h2 class="card-title h5">
+                                    <?php echo htmlspecialchars($row['c_name']); ?>
+                                    <?php if($purchased) { ?>
+                                        <span class="badge bg-success ms-2">Purchased</span>
+                                    <?php } ?>
+                                </h2>
                                 <p class="card-text flex-grow-1"><?php echo htmlspecialchars($row['description']); ?></p>
                                 
                                 <div class="d-flex justify-content-between align-items-center mt-3">
                                     <span class="text-primary fw-bold">$<?php echo number_format($row['price']); ?></span>
-                                    <?php if(isset($_SESSION['id'])) { ?>
-                                        <form method="post" action="<?php echo base_url; ?>DB/add_to_cart.php">
-                                            <input type="hidden" name="id" value="<?php echo $row['c_id']; ?>">
-                                            <input type="hidden" name="cname" value="<?php echo htmlspecialchars($row['c_name']); ?>">
-                                            <input type="hidden" name="price" value="<?php echo $row['price']; ?>">
-                                            <button type="submit" class="btn btn-sm btn-primary px-3">Get Course</button>
-                                        </form>
-                                    <?php } else { ?>
-                                        <a href="<?php echo base_url; ?>others/signin.php" class="btn btn-sm btn-primary px-3">Get Course</a>
+                                    <?php if(!$purchased) { ?>
+                                        <?php if(isset($_SESSION['id'])) { ?>
+                                            <form method="post" action="<?php echo base_url; ?>DB/add_to_cart.php">
+                                                <input type="hidden" name="id" value="<?php echo $row['c_id']; ?>">
+                                                <input type="hidden" name="cname" value="<?php echo htmlspecialchars($row['c_name']); ?>">
+                                                <input type="hidden" name="price" value="<?php echo $row['price']; ?>">
+                                                <button type="submit" class="btn btn-sm btn-primary px-3">Get Course</button>
+                                            </form>
+                                        <?php } else { ?>
+                                            <a href="<?php echo base_url; ?>others/signin.php" class="btn btn-sm btn-primary px-3">Get Course</a>
+                                        <?php } ?>
                                     <?php } ?>
                                 </div>
                             </div>

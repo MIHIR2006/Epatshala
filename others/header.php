@@ -74,9 +74,9 @@ define('base_url', "http://localhost/Epatshala/");?>
                         </li>
                         <li class="nav-item px-4">
                             <a class="nav-link fw-semibold" href="<?php echo base_url; ?>others/courses.php">Courses</a>
-                        </li>
+                        </li>                       
                         <li class="nav-item px-4">
-                            <a class="nav-link fw-semibold" href="#">About</a>
+                            <a class="nav-link fw-semibold" href="<?php echo base_url; ?>others/about.php">About</a>
                         </li>
                         <li class="nav-item px-4">
                             <a class="nav-link fw-semibold" href="<?php echo base_url; ?>DB/cart.php">Cart</a>
@@ -107,6 +107,10 @@ define('base_url', "http://localhost/Epatshala/");?>
             </div>
         </nav>
         <!-- Navbar End -->
+
+        <!-- Breadcrumb -->
+        <?php include_once 'breadcrumb.php'; ?>
+        <!-- Breadcrumb End -->
 
     <script type="text/javascript">
         // JavaScript function to show an alert before logging out

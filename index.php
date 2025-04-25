@@ -73,22 +73,40 @@ require 'others/header.php';
                    
                     <div class="card-body d-flex flex-column p-4">
                         <div class="mb-3">
+                            <?php
+                            // Check if user is logged in and has purchased the course
+                            $purchased = false;
+                            if(isset($_SESSION['id'])) {
+                                $user_id = $_SESSION['id'];
+                                $course_id = $row['c_id'];
+                                $check_purchase = "SELECT * FROM enroll_details ed 
+                                                 JOIN enroll e ON ed.oid = e.id 
+                                                 WHERE e.uid = $user_id AND ed.c_id = $course_id";
+                                $purchase_result = mysqli_query($db, $check_purchase);
+                                $purchased = mysqli_num_rows($purchase_result) > 0;
+                            }
+                            ?>
                             <span class="badge bg-primary mb-2"><?php echo strtoupper($row['category'] ?? 'CODE'); ?></span>
+                            <?php if($purchased) { ?>
+                                <span class="badge bg-success mb-2 ms-2">Purchased</span>
+                            <?php } ?>
                             <h5 class="card-title fw-bold"><?php echo htmlspecialchars($row['c_name']); ?></h5>
                             <p class="text-muted small mb-2"><?php echo htmlspecialchars($row['subtitle'] ?? ''); ?></p>
                         </div>
-                       
+                        
                         <p class="card-text flex-grow-1 text-muted"><?php echo htmlspecialchars($row['description']); ?></p>
-                       
+                        
                         <div class="d-flex justify-content-between align-items-center mt-4">
                             <span class="text-primary fw-bold">$<?php echo number_format($row['price']); ?></span>
-                            <?php if(isset($_SESSION['id'])) { ?>
-                                <form method="post" action="<?php echo base_url; ?>DB/add_to_cart.php">
-                                    <input type="hidden" name="id" value="<?php echo $row['c_id'];?>">
-                                    <button type="submit" class="btn btn-primary px-3">Get Course</button>
-                                </form>
-                            <?php } else { ?>
-                                <a href="<?php echo base_url; ?>others/signin.php" class="btn btn-primary px-3">Get Course</a>
+                            <?php if(!$purchased) { ?>
+                                <?php if(isset($_SESSION['id'])) { ?>
+                                    <form method="post" action="<?php echo base_url; ?>DB/add_to_cart.php">
+                                        <input type="hidden" name="id" value="<?php echo $row['c_id'];?>">
+                                        <button type="submit" class="btn btn-primary px-3">Get Course</button>
+                                    </form>
+                                <?php } else { ?>
+                                    <a href="<?php echo base_url; ?>others/signin.php" class="btn btn-primary px-3">Get Course</a>
+                                <?php } ?>
                             <?php } ?>
                         </div>
                     </div>

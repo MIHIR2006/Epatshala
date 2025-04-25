@@ -46,7 +46,9 @@
       echo "</table>";
     }
     }else{
-      echo "Cart Is Emty";
+  echo '<div class="alert alert-secondary" role="alert">
+  Cart Is Empty
+</div>         <div class = "mb-3">  <a href="../others/courses.php" class="btn btn-outline-secondary btn-lg">Check out our courses</a> </div>';
     }
     require '../others/footer.php';
   ?>
