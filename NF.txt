@@ -1,0 +1,31 @@
+Normalization and 3NF Evaluation:
+
+1. First Normal Form (1NF):
+1NF requires that the table only contains atomic (indivisible) values and each record (row) is unique.
+
+All the tables in this schema adhere to 1NF as they do not have any multi-valued attributes. Each field holds a single value, and all rows are uniquely identifiable by primary keys.
+
+2. Second Normal Form (2NF):
+
+2NF requires that the table is in 1NF, and all non-key attributes are fully functionally dependent on the primary key.
+
+All the tables also adhere to 2NF because non-key attributes depend entirely on the primary key and not on any partial key.
+
+For example, in the cart table, user_id and course_id are needed to determine a cart record. There is no partial dependency in any of the tables.
+
+3. Third Normal Form (3NF):
+
+3NF requires that the table is in 2NF and that no transitive dependency exists, meaning non-key attributes must not depend on other non-key attributes.
+
+Looking through the tables:
+
+In the user table, name, email, password, and phone_number depend only on the id (primary key), and none of these depend on another non-key attribute.
+
+In the orders table, total_amount and order_date depend only on the id (primary key), with no transitive dependencies.
+
+The same applies to other tables like reviews, payment, cart, etc.
+
+Thus, all tables are in 3NF as there are no transitive dependencies.
+
+Conclusion:
+The schema is well-structured, adheres to 1NF, 2NF, and 3NF, and is normalized to 3NF. It avoids redundancy and ensures efficient database design.
