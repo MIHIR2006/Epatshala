@@ -8,6 +8,7 @@
 
 ![Hero](Hero.png)
 ![course](course.png)
+![course](CoursePage.png)
 ![Account](Account.png)
 ![cart](cart.png)
 ![Payfast](Payfast.png)
